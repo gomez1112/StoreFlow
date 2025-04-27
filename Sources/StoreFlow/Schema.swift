@@ -14,6 +14,7 @@ import SwiftData
 
 @Model public final class EntitlementRecord {
     @Attribute(.unique) public var productID: String
+    
     public init(productID: String) {
         self.productID = productID
     }
