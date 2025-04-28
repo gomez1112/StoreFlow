@@ -17,3 +17,5 @@ public enum AccessLevel: Int, Codable, Sendable, Comparable {
 public protocol AccessLevelMappable {
     var accessLevel: AccessLevel { get }
 }
+
+

@@ -228,6 +228,7 @@ public final class Store<ID: StoreProductID> {
     }
     
     private func refreshCaches() { bootstrapFromDisk() }
+    
 }
 
 // ───────────────────────────────────────────────────────────────────────────
