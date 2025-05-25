@@ -89,6 +89,7 @@ public final class StoreFlow: Sendable {
             do {
                 let transaction = try result.payloadValue
                 try await handleTransaction(transaction)
+                await transaction.finish()
             } catch let err as StoreError {
                 await MainActor.run { self.error = err }
             } catch {
