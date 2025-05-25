@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol StoreConfiguration {
+public protocol StoreConfiguration: Sendable {
     var groupID: String { get }
     var productIDs: [String] { get }
     var productAccess: [String: AccessLevel] { get }

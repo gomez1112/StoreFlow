@@ -20,6 +20,9 @@ public enum StoreError: LocalizedError, Sendable, Identifiable, Equatable {
     case swiftDataSaveFailed(Error), swiftDataFetchFailed(Error)
     case subscriptionStatusFailed(Error)
     case unsupportedProductType, unknownProduct
+    case purchasePending
+    case invalidAmount
+    case syncFailed(Error)
     case unknown(Error)
     
     public var errorDescription: String? {
@@ -28,10 +31,13 @@ public enum StoreError: LocalizedError, Sendable, Identifiable, Equatable {
             case .insufficientBalance:     "Not enough credits remaining."
             case .unsupportedProductType:  "Unsupported product type."
             case .unknownProduct:          "Unrecognised product identifier."
+            case .purchasePending: "Purchase pending"
+            case .invalidAmount: "The amount is invalid"
             case .productRequestFailed(let e),
                     .swiftDataSaveFailed(let e),
                     .swiftDataFetchFailed(let e),
                     .subscriptionStatusFailed(let e),
+                    .syncFailed(let e),
                     .unknown(let e):          e.localizedDescription
         }
     }
