@@ -8,6 +8,7 @@ import Foundation
 import StoreKit
 import SwiftData
 import SwiftUI
+import OSLog
 
 
 
@@ -16,6 +17,8 @@ import SwiftUI
 public final class StoreFlow: Sendable {
     private let config: StoreConfiguration
     private let modelContext: ModelContext
+    private let logger = Logger(subsystem: "StoreFlow", category: "Store")
+    private var updatesTask: Task<Void, Never>?
     
     public private(set) var currentAccess: AccessLevel = .notSubscribed
     public private(set) var availableProducts: [Product] = []
@@ -83,7 +86,6 @@ public final class StoreFlow: Sendable {
             currentAccess = access
         }
     }
-    
     private func observeTransactions() async {
         for await result in Transaction.updates {
             do {
