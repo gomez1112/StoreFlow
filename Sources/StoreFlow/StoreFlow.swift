@@ -26,7 +26,17 @@ public final class StoreFlow {
     public private(set) var purchasedProductIDs: Set<String> = []
     public private(set) var activeSubscriptions: Set<String> = []
     public var error: StoreError?
+    var consumableTransactions: [StoreKit.Transaction] = []
     
+    func loadConsumableTransactions() async {
+            var transactions: [StoreKit.Transaction] = []
+            for await result in StoreKit.Transaction.all {
+                if let transaction = try? result.payloadValue, transaction.productType == .consumable {
+                    transactions.append(transaction)
+                }
+            }
+            consumableTransactions = transactions
+    }
     public init(configuration: StoreConfiguration, modelContext: ModelContext) {
         self.config = configuration
         self.modelContext = modelContext
